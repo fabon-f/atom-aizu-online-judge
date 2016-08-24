@@ -1,0 +1,19 @@
+{
+  "name": "aizu-online-judge",
+  "main": "./lib/aizu-online-judge",
+  "version": "0.0.0",
+  "description": "A package to support AOJ(Aizu Online Judge) life",
+  "keywords": [
+    "Aizu Online Judge"
+  ],
+  "activationCommands": {
+    "atom-workspace": "aizu-online-judge:toggle"
+  },
+  "repository": "https://github.com/hinamiyagk/atom-aizu-online-judge",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

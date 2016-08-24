@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle aizu-online-judge",
+        "command": "aizu-online-judge:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "aizu-online-judge",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "aizu-online-judge:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
