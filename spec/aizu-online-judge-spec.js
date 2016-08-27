@@ -1,6 +1,5 @@
 'use babel';
 
-import AizuOnlineJudge from '../lib/aizu-online-judge';
 import ProblemViewer from '../lib/problem-viewer';
 
 describe('AizuOnlineJudge', () => {
