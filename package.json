@@ -7,7 +7,9 @@
     "Aizu Online Judge"
   ],
   "activationCommands": {
-    "atom-workspace": "aizu-online-judge:toggle"
+    "atom-workspace": [
+      "aizu-online-judge:show-problem"
+    ]
   },
   "repository": "https://github.com/hinamiyagk/atom-aizu-online-judge",
   "license": "MIT",

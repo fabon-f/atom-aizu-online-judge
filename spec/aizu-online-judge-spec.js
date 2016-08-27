@@ -1,72 +1,30 @@
 'use babel';
 
 import AizuOnlineJudge from '../lib/aizu-online-judge';
-
-// Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
-//
-// To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
-// or `fdescribe`). Remove the `f` to unfocus the block.
+import ProblemViewer from '../lib/problem-viewer';
 
 describe('AizuOnlineJudge', () => {
-  let workspaceElement, activationPromise;
+  describe('when the aizu-online-judge:show-problem event is triggered', () => {
+    let activationPromise, workspaceElement;
 
-  beforeEach(() => {
-    workspaceElement = atom.views.getView(atom.workspace);
-    activationPromise = atom.packages.activatePackage('aizu-online-judge');
-  });
-
-  describe('when the aizu-online-judge:toggle event is triggered', () => {
-    it('hides and shows the modal panel', () => {
-      // Before the activation event the view is not on the DOM, and no panel
-      // has been created
-      expect(workspaceElement.querySelector('.aizu-online-judge')).not.toExist();
-
-      // This is an activation event, triggering it will cause the package to be
-      // activated.
-      atom.commands.dispatch(workspaceElement, 'aizu-online-judge:toggle');
-
-      waitsForPromise(() => {
-        return activationPromise;
-      });
-
-      runs(() => {
-        expect(workspaceElement.querySelector('.aizu-online-judge')).toExist();
-
-        let aizuOnlineJudgeElement = workspaceElement.querySelector('.aizu-online-judge');
-        expect(aizuOnlineJudgeElement).toExist();
-
-        let aizuOnlineJudgePanel = atom.workspace.panelForItem(aizuOnlineJudgeElement);
-        expect(aizuOnlineJudgePanel.isVisible()).toBe(true);
-        atom.commands.dispatch(workspaceElement, 'aizu-online-judge:toggle');
-        expect(aizuOnlineJudgePanel.isVisible()).toBe(false);
-      });
+    beforeEach(() => {
+      activationPromise = atom.packages.activatePackage('aizu-online-judge');
+      workspaceElement = atom.views.getView(atom.workspace);
     });
 
-    it('hides and shows the view', () => {
-      // This test shows you an integration test testing at the view level.
+    it('opens problem viewer pane', () => {
+      expect(workspaceElement.querySelector('.aoj-problem-viewer')).not.toExist();
+      for (const paneItem of atom.workspace.getPaneItems()) {
+        expect(paneItem).not.toBeInstanceOf(ProblemViewer);
+      }
 
-      // Attaching the workspaceElement to the DOM is required to allow the
-      // `toBeVisible()` matchers to work. Anything testing visibility or focus
-      // requires that the workspaceElement is on the DOM. Tests that attach the
-      // workspaceElement to the DOM are generally slower than those off DOM.
-      jasmine.attachToDOM(workspaceElement);
+      atom.commands.dispatch(workspaceElement, 'aizu-online-judge:show-problem');
 
-      expect(workspaceElement.querySelector('.aizu-online-judge')).not.toExist();
-
-      // This is an activation event, triggering it causes the package to be
-      // activated.
-      atom.commands.dispatch(workspaceElement, 'aizu-online-judge:toggle');
-
-      waitsForPromise(() => {
-        return activationPromise;
-      });
+      waitsForPromise(() => activationPromise);
 
       runs(() => {
-        // Now we can test for view visibility
-        let aizuOnlineJudgeElement = workspaceElement.querySelector('.aizu-online-judge');
-        expect(aizuOnlineJudgeElement).toBeVisible();
-        atom.commands.dispatch(workspaceElement, 'aizu-online-judge:toggle');
-        expect(aizuOnlineJudgeElement).not.toBeVisible();
+        expect(workspaceElement.querySelector('.aoj-problem-viewer')).toExist();
+        expect(atom.workspace.getActivePaneItem()).toBeInstanceOf(ProblemViewer);
       });
     });
   });
