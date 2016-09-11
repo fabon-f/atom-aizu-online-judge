@@ -23,3 +23,8 @@ branches:
 
 git:
   depth: 10
+
+addons:
+  apt:
+    packages:
+      - build-essential
