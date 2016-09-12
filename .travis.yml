@@ -1,15 +1,12 @@
 sudo: false
 
 env:
-  global:
-    - APM_TEST_PACKAGES=""
-    - ATOM_LINT_WITH_BUNDLED_NODE="false"
   matrix:
     - ATOM_CHANNEL=stable
-    - ATOM_CHANNEL=beta
+    # - ATOM_CHANNEL=beta
 
 os:
-  - linux
+  # - linux
   - osx
 
 # Installed for linting the project
@@ -18,16 +15,7 @@ node_js: "6"
 
 install: true
 
-script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
-
-branches:
-  only:
-    - master
+script: ./scripts/build-package
 
 git:
   depth: 10
-
-addons:
-  apt:
-    packages:
-      - build-essential
