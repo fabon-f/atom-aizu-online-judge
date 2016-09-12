@@ -15,7 +15,9 @@ node_js: "6"
 
 install: true
 
-script: ./scripts/build-package
+script:
+  - ./scripts/build-package
+  - npm run lint --silent
 
 git:
   depth: 10

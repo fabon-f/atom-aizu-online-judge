@@ -3,6 +3,9 @@
   "main": "./lib/aizu-online-judge",
   "version": "0.0.0",
   "description": "A package to support AOJ(Aizu Online Judge) life",
+  "scripts": {
+    "lint": "eslint ."
+  },
   "keywords": [
     "Aizu Online Judge"
   ],
