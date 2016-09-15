@@ -65,6 +65,7 @@ describe('AizuOnlineJudge', () => {
         runs(() => {
           expect(atom.workspace.getActivePaneItem()).toBeInstanceOf(ProblemViewer);
           expect(atom.workspace.getActivePaneItem().getTitle()).toBe('0300');
+          expect(getView(atom.workspace.getActivePaneItem()).classList.contains('aoj-problem-viewer')).toBe(true);
         });
 
         waitsFor(
@@ -74,6 +75,8 @@ describe('AizuOnlineJudge', () => {
 
         runs(() => {
           expect(atom.workspace.getActivePaneItem().getTitle()).toBe('フロッピーキューブ');
+          const problemViewerElement = getView(atom.workspace.getActivePaneItem());
+          expect(problemViewerElement.childNodes[0].tagName).toBe('IFRAME');
         });
       });
     });
