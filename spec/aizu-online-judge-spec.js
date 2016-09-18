@@ -44,6 +44,8 @@ describe('AizuOnlineJudge', () => {
       const activationPromise = atom.packages.activatePackage('aizu-online-judge');
       workspaceElement = atom.views.getView(atom.workspace);
 
+      jasmine.attachToDOM(workspaceElement);
+
       atom.commands.dispatch(workspaceElement, 'aizu-online-judge:show-problem');
       waitsForPromise(() => activationPromise);
 
@@ -86,6 +88,14 @@ describe('AizuOnlineJudge', () => {
         expect(atom.workspace.getModalPanels()).toHaveLength(1);
 
         atom.commands.dispatch(inputElement, 'core:cancel');
+
+        expect(atom.workspace.getModalPanels()).toHaveLength(0);
+      });
+    });
+
+    describe('and the input box is unfocused', () => {
+      it('hides the modal panel', () => {
+        document.body.focus();
 
         expect(atom.workspace.getModalPanels()).toHaveLength(0);
       });
