@@ -62,4 +62,7 @@ else
   exitcode=1
 fi
 
+# Linting
+npm run lint --silent || exitcode=1
+
 exit $exitcode
