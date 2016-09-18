@@ -1,5 +1,6 @@
 'use babel';
 
+import { shell } from 'electron';
 import ProblemViewer from '../lib/problem-viewer';
 
 const getView = item => {
@@ -75,10 +76,24 @@ describe('AizuOnlineJudge', () => {
           'The problem view is loaded', 2000
         );
 
+        let flag = false;
+        spyOn(shell, 'openExternal');
+
         runs(() => {
           expect(atom.workspace.getActivePaneItem().getTitle()).toBe('フロッピーキューブ');
           const problemViewerElement = getView(atom.workspace.getActivePaneItem());
-          expect(problemViewerElement.childNodes[0].tagName).toBe('WEBVIEW');
+          const descriptionViewerElement = problemViewerElement.childNodes[0];
+          expect(descriptionViewerElement.tagName).toBe('WEBVIEW');
+
+          descriptionViewerElement.executeJavaScript('document.querySelector("a").click()', () => {
+            flag = true;
+          });
+        });
+
+        waitsFor(() => flag, 'clicking link is finished');
+
+        runs(() => {
+          expect(shell.openExternal).toHaveBeenCalledWith('http://web-ext.u-aizu.ac.jp/pc-concours/');
         });
       });
     });
