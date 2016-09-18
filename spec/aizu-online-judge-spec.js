@@ -76,7 +76,7 @@ describe('AizuOnlineJudge', () => {
         runs(() => {
           expect(atom.workspace.getActivePaneItem().getTitle()).toBe('フロッピーキューブ');
           const problemViewerElement = getView(atom.workspace.getActivePaneItem());
-          expect(problemViewerElement.childNodes[0].tagName).toBe('IFRAME');
+          expect(problemViewerElement.childNodes[0].tagName).toBe('WEBVIEW');
         });
       });
     });
