@@ -6,7 +6,7 @@ env:
     # - ATOM_CHANNEL=beta
 
 os:
-  # - linux
+  - linux
   - osx
 
 # Installed for linting the project
